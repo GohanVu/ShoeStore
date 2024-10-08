@@ -1,20 +1,17 @@
-package com.gohanvu.store_backend.models;
-
+package com.gohanvu.store_backend.models;// Cart.java
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
 @Entity
-@Table(name = "cart", schema = "storegohan")
+@Table(name = "cart")
+@Data
 public class Cart {
     @Id
-    @Column(name = "cart_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cart_id")
+    private int cartId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cart_customerId")
-    private Customer cartCustomer;
-
+    private Customer customer;
 }

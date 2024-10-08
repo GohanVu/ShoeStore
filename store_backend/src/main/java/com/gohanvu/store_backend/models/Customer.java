@@ -1,38 +1,31 @@
-package com.gohanvu.store_backend.models;
-
+package com.gohanvu.store_backend.models;// Customer.java
 import com.gohanvu.store_backend.models.enums.Gender;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
 @Entity
-@Table(name = "customer", schema = "storegohan")
+@Table(name = "customer")
+@Data
 public class Customer {
     @Id
-    @Column(name = "customer_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id")
+    private int customerId;
 
-    @Size(max = 50)
-    @Column(name = "customer_name", length = 50)
+    @Column(name = "customer_name")
     private String customerName;
 
-    @Size(max = 100)
-    @Column(name = "customer_email", length = 100)
+    @Column(name = "customer_email")
     private String customerEmail;
 
-    @Size(max = 15)
-    @Column(name = "customer_phone", length = 15)
+    @Column(name = "customer_phone")
     private String customerPhone;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "customer_gender")
+    @Enumerated(EnumType.STRING)
     private Gender customerGender;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "customer_userId")
-    private Appuser customerUser;
-
+    private AppUser user;
 }

@@ -1,22 +1,16 @@
-package com.gohanvu.store_backend.models;
+package com.gohanvu.store_backend.models;// Size.java
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity
-@Table(name = "size", schema = "storegohan")
+@Table(name = "size")
+@Data
 public class Size {
     @Id
-    @Column(name = "size_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "size_id")
+    private int sizeId;
 
     @Column(name = "size_number")
-    private Integer sizeNumber;
-
+    private int sizeNumber;
 }

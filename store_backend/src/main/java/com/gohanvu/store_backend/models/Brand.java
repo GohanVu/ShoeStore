@@ -1,24 +1,16 @@
-package com.gohanvu.store_backend.models;
+package com.gohanvu.store_backend.models;// Brand.java
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity
-@Table(name = "brand", schema = "storegohan")
+@Table(name = "brand")
+@Data
 public class Brand {
     @Id
-    @Column(name = "brand_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "brand_id")
+    private int brandId;
 
-    @Size(max = 255)
     @Column(name = "brand_name")
     private String brandName;
-
 }

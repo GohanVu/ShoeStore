@@ -2,6 +2,7 @@ CREATE DATABASE storeGohan;
 
 USE storeGohan;
 
+drop database  storeGohan;
 CREATE TABLE category (
                           category_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                           category_name VARCHAR(255)
@@ -28,6 +29,13 @@ CREATE TABLE products (
                           product_createdAt TIMESTAMP,
                           FOREIGN KEY (product_categoryId) REFERENCES category(category_id),
                           FOREIGN KEY (product_brandId) REFERENCES brand(brand_id)
+);
+
+CREATE TABLE productImages (
+                               productImage_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                               productImage_productId INT,
+                               productImage_url VARCHAR(255),
+                               FOREIGN KEY (productImage_productId) REFERENCES products(product_id)
 );
 
 CREATE TABLE productQuantity (
@@ -113,3 +121,13 @@ CREATE TABLE cartDetail (
                             FOREIGN KEY (cartDetail_productId) REFERENCES products(product_id),
                             FOREIGN KEY (cartDetail_sizeId) REFERENCES size(size_id)
 );
+
+alter table cartdetail
+    add constraint cartdetail_pk
+        primary key (cartDetail_cartId, cartDetail_productId, cartDetail_sizeId);
+
+alter table productquantity
+    add constraint productquantity_pk
+        primary key (productQuantity_productId, productQuantity_sizeId);
+
+

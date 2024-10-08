@@ -1,44 +1,37 @@
 package com.gohanvu.store_backend.models;
-
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import java.sql.Timestamp;
 
-import java.time.Instant;
-
-@Getter
-@Setter
 @Entity
-@Table(name = "products", schema = "storegohan")
+@Table(name = "products")
+@Data
 public class Product {
     @Id
-    @Column(name = "product_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
+    private int productId;
 
-    @Size(max = 255)
     @Column(name = "product_name")
     private String productName;
 
     @Column(name = "product_price")
-    private Float productPrice;
+    private float productPrice;
 
-    @Lob
     @Column(name = "product_description")
     private String productDescription;
 
     @Column(name = "product_imgCode")
-    private Integer productImgcode;
+    private int productImgCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_brandId")
-    private Brand productBrand;
+    private Brand brand;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_categoryId")
-    private Category productCategory;
+    private Category category;
 
     @Column(name = "product_createdAt")
-    private Instant productCreatedat;
-
+    private Timestamp productCreatedAt;
 }
